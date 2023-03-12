@@ -11,19 +11,25 @@ import org.bukkit.event.vehicle.VehicleMoveEvent
 import org.bukkit.plugin.java.JavaPlugin
 
 class FastMinecarts : JavaPlugin(), Listener {
-    private var _blocks = listOf(Material.GRAVEL)
-    private var _speedMultiplier = 2.0
+    private var _blockMaxSpeeds = mutableMapOf<Material, Double>()
     private val railTypes = listOf(
         Material.RAIL, Material.POWERED_RAIL,
         Material.DETECTOR_RAIL, Material.ACTIVATOR_RAIL
     )
     override fun onEnable() {
         saveDefaultConfig()
-        _blocks = config.getStringList("blocks").map{
-            Material.getMaterial(it) ?: Material.GRAVEL
-        }
-        _speedMultiplier = config.getDouble("speed-multiplier", 2.0)
+        loadConfig()
         Bukkit.getPluginManager().registerEvents(this, this)
+    }
+    private fun loadConfig() {
+        val blockConfig = config.getConfigurationSection("blocks") ?: return
+        _blockMaxSpeeds.clear()
+        for (key in blockConfig.getKeys(false)) {
+            val material = Material.getMaterial(key)
+            if (material != null) {
+                _blockMaxSpeeds[material] = blockConfig.getDouble(key)
+            }
+        }
     }
     @EventHandler(ignoreCancelled = true)
     fun onVehicleMove(event: VehicleMoveEvent) {
@@ -37,9 +43,8 @@ class FastMinecarts : JavaPlugin(), Listener {
         if (railBlock.type !in railTypes) return
 
         val blockBelow = railBlock.getRelative(0, -1, 0)
-        if (blockBelow.type in _blocks) {
-            minecart.maxSpeed *= _speedMultiplier
-        }
+        val blockMultiplier = _blockMaxSpeeds[blockBelow.type] ?: 1.0
+        minecart.maxSpeed = blockMultiplier
     }
 
     @EventHandler(ignoreCancelled = true)
