@@ -6,6 +6,7 @@ import org.bukkit.entity.Minecart
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.vehicle.VehicleExitEvent
 import org.bukkit.event.vehicle.VehicleMoveEvent
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -22,7 +23,6 @@ class FastMinecarts : JavaPlugin(), Listener {
             Material.getMaterial(it) ?: Material.GRAVEL
         }
         _speedMultiplier = config.getDouble("speed-multiplier", 2.0)
-        println("Speed Multiplier: $_speedMultiplier")
         Bukkit.getPluginManager().registerEvents(this, this)
     }
     @EventHandler(ignoreCancelled = true)
@@ -39,6 +39,17 @@ class FastMinecarts : JavaPlugin(), Listener {
         val blockBelow = railBlock.getRelative(0, -1, 0)
         if (blockBelow.type in _blocks) {
             minecart.maxSpeed *= _speedMultiplier
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    fun onVehicleExit(event: VehicleExitEvent) {
+        if (event.vehicle !is Minecart) return
+        if (event.exited !is Player) return
+
+        val minecart = event.vehicle as Minecart
+        if (minecart.maxSpeed > 0.4) {  // vanilla max speed
+            minecart.maxSpeed = 0.4
         }
     }
 }
