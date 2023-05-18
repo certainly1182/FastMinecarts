@@ -29,6 +29,6 @@ blocks:
   SOUL_SAND: 0.2
 ```
 ## Usage
-The FastMinecarts plugin does not *yet* have any commands or permissions. Simply install and configue the plugin on your server to start using it.
+The FastMinecarts plugin does not *yet* have any commands or permissions. Simply install and configure the plugin on your server to start using it.
 
-When a player enters a minecart on rails above configuered blocks, the speed is modified.
+When a player enters a minecart on rails above configured blocks, the speed is modified.
