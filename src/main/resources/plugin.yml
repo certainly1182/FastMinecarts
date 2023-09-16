@@ -1,4 +1,7 @@
 name: FastMinecarts
 version: '${project.version}'
 main: me.certainly1182.fastminecarts.FastMinecarts
-api-version: 1.19
+api-version: '1.19'
+commands:
+  FastMinecarts:
+    description: Reloads the FastMinecarts plugin
