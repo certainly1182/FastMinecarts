@@ -1,16 +1,17 @@
 # FastMinecarts Plugin
 [![GitHub Release](https://img.shields.io/github/v/release/certainly1182/FastMinecarts?include_prereleases)](https://github.com/certainly1182/FastMinecarts/releases)
-[![Modrinth Downloads](https://img.shields.io/modrinth/dt/######)](https://modrinth.com/plugin/######)
+<!--- [![Modrinth Downloads](https://img.shields.io/modrinth/dt/######)](https://modrinth.com/plugin/######) -->
 
-Simple plugin for Minecraft [Spigot](https://spigotmc.org) servers that changes the speed of minecarts depending on the block beneath the rails.
+A simple plugin for Minecraft [Spigot](https://spigotmc.org) servers that allows you to change the speed of minecarts depending on the block beneath the rails or globally.
 
 ## Features
+- Configure the global speed.
 - Configure which blocks affect speed.
 - Choose the minecart speed for each block.
 - Slow minecarts back to vanilla speed when the player disembarks.
 ## Installation
 To install FastMinecarts, follow these steps:
-1. Download the plugin JAR file from [Modrinth](https://modrinth.com/plugin/#####) or the [Releases](https://github.com/certainly1182/FastMinecarts/releases) page.
+1. Download the plugin JAR file from<!--- [Modrinth](https://modrinth.com/plugin/#####)  or the--> [Releases](https://github.com/certainly1182/FastMinecarts/releases) page.
 2. Place the JAR file in the plugins folder of your Spigot (or Spigot fork) server.
 3. Start the server and verify that the plugin loaded successfully.
 ## Configuration
@@ -30,6 +31,6 @@ blocks:
   SOUL_SAND: 0.2
 ```
 ## Usage
-The FastMinecarts plugin has the command "/FastMinecarts Reload" and it requires the permission: "FastMinecarts.reload" but also can be run by an op. Simply install and configure the plugin on your server to start using it.
+The FastMinecarts plugin has the command "/FastMinecarts Reload" to reload the config, and it requires the permission: "FastMinecarts.reload" but also can be run by an op. Simply install and configure the plugin on your server to start using it.
 
-The speed is modified when a player enters a minecart on rails above configured blocks.
+The global speed gets applied when a player enters a minecart on rails, and when you ride the minecart above the configured blocks it will change the speed to the configured value.
